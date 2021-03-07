@@ -1,0 +1,7 @@
+#This query retrieves the version in the decidim platform.
+
+{
+     decidim {
+        version
+    }
+}

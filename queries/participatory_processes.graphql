@@ -1,0 +1,13 @@
+#This query retrieves a list of participatory processes
+
+{
+  participatoryProcesses(filter: {%FILTER%}, order: {%ORDER%}) {
+    id
+    title {
+      translations {
+        locale
+        text
+      }
+    }
+  }
+}
