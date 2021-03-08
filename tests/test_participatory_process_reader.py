@@ -10,14 +10,14 @@ API_URL = "https://meta.decidim.org/api"
 class ParticipatoryProcessesReaderTest(unittest.TestCase):
     def test_process_query_not_exists(self):
         decidim_connector: DecidimConnector = DecidimConnector(API_URL)
-        reader: ParticipatoryProcessReader = ParticipatoryProcessReader(decidim_connector,  base_path="..")
-        participatory_process = reader.process_query(-4) # We use the participatory process #40 on Decidim.org api.
+        reader: ParticipatoryProcessReader = ParticipatoryProcessReader(decidim_connector, base_path="..")
+        participatory_process = reader.process_query("-4")  # We use the participatory process #40 on Decidim.org api.
         self.assertIsNone(participatory_process)
 
     def test_process_query(self):
         decidim_connector: DecidimConnector = DecidimConnector(API_URL)
-        reader: ParticipatoryProcessReader = ParticipatoryProcessReader(decidim_connector,  base_path="..")
-        participatory_process = reader.process_query(40) # We use the participatory process #40 on Decidim.org api.
+        reader: ParticipatoryProcessReader = ParticipatoryProcessReader(decidim_connector, base_path="..")
+        participatory_process = reader.process_query("40")  # We use the participatory process #40 on Decidim.org api.
         self.assertIsInstance(participatory_process, ParticipatoryProcess)
 
 

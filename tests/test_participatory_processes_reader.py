@@ -3,7 +3,6 @@ from typing import List
 
 from api.decidim_connector import DecidimConnector
 from api.participatory_processes_reader import ParticipatoryProcessesReader
-from model.participatory_process import ParticipatoryProcess
 
 API_URL = "https://meta.decidim.org/api"
 

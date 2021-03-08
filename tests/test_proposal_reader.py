@@ -12,14 +12,14 @@ class ProposalReaderTest(unittest.TestCase):
         decidim_connector: DecidimConnector = DecidimConnector(API_URL)
         reader: ProposalReader = ProposalReader(decidim_connector,  base_path="..")
         # We use the participatory process #40 on Decidim.org api and the Proposal #12040
-        proposal: Proposal = reader.process_query(40, 1)
+        proposal: Proposal = reader.process_query("40", "1")
         self.assertIsNone(proposal)
 
     def test_process_query(self):
         decidim_connector: DecidimConnector = DecidimConnector(API_URL)
         reader: ProposalReader = ProposalReader(decidim_connector,  base_path="..")
         # We use the participatory process #40 on Decidim.org api and the Proposal #12040
-        proposal: Proposal = reader.process_query(40, 12040)
+        proposal: Proposal = reader.process_query("40", "12040")
         self.assertIsInstance(proposal, Proposal)
 
 
