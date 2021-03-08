@@ -5,7 +5,7 @@
     id
     title {
       translations {
-        locale
+        locale,
         text
       }
     }

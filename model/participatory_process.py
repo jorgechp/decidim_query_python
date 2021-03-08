@@ -1,4 +1,7 @@
+from typing import List
+
 from model.abstract_api_element import AbstractApiElement
+from model.component_interface import ComponentInterface
 from model.translated_field import TranslatedField
 
 
@@ -15,6 +18,11 @@ class ParticipatoryProcess(AbstractApiElement):
     def title(self) -> TranslatedField:
         return self.__title
 
-    def __init__(self, title: TranslatedField, process_id: str) -> None:
+    @property
+    def components(self) -> List[ComponentInterface] or None:
+        return self.__components
+
+    def __init__(self, process_id: str, title: TranslatedField, components: List[ComponentInterface] or None) -> None:
         self.__id: str = process_id
         self.__title: TranslatedField = title
+        self.__components: List[ComponentInterface] = components

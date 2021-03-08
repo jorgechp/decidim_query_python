@@ -1,0 +1,23 @@
+#This query retrieves a Participatory process and its components
+
+{
+  participatoryProcess(id: %ID%) {
+    id
+    title {
+      translations {
+        locale,
+        text
+      }
+    }
+    components{
+        id,
+        name{
+          translations {
+            locale,
+            text,
+          }
+        },
+        weight
+     }
+  }
+}

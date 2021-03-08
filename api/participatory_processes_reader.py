@@ -5,6 +5,7 @@ from typing import List
 
 from api.abstract_decidim_reader import AbstractDecidimReader
 from api.decidim_connector import DecidimConnector
+from model.component_interface import ComponentInterface
 from model.participatory_process import ParticipatoryProcess
 
 from model.participatory_process_filter import ParticipatoryProcessFilter
@@ -43,7 +44,10 @@ class ParticipatoryProcessesReader(AbstractDecidimReader):
         for participatory_process_dict in response['participatoryProcesses']:
             id: str = participatory_process_dict['id']
             translations: [] = participatory_process_dict['title']['translations']
+
             title: TranslatedField = TranslatedField.parse_from_gql(translations)
-            participatory_process: ParticipatoryProcess = ParticipatoryProcess(id=id, title=title)
+            participatory_process: ParticipatoryProcess = ParticipatoryProcess(process_id=id,
+                                                                               title=title,
+                                                                               components=None)
             participatory_processes.append(participatory_process)
         return participatory_processes
