@@ -1,3 +1,5 @@
+import time
+
 from api.comment_reader import CommentReader
 from api.decidim_connector import DecidimConnector
 from api.participatory_processes_reader import ParticipatoryProcessesReader
@@ -21,6 +23,7 @@ for partipatory_process in participatory_processes:
     proposals_list = proposals_reader.process_query(partipatory_process)
     for proposal in proposals_list:
         proposal_full_info = proposal_reader.process_query(partipatory_process, proposal)
+        time.sleep(3)
         if proposal_full_info.has_comments:
             for comment_id in proposal_full_info.comments_ids:
                 comment_full_info = comment_reader.process_query(
@@ -28,6 +31,8 @@ for partipatory_process in participatory_processes:
                     proposal,
                     comment_id
                 )
+                print(comment_full_info)
+                time.sleep(3)
 
 
 
