@@ -13,7 +13,9 @@ class ProposalsReaderTest(unittest.TestCase):
         reader: ProposalsReader = ProposalsReader(decidim_connector,  base_path="..")
         # We use the participatory process #40.
         proposals: List[str] = reader.process_query(40)
-        self.assertIsInstance(proposals, List[str])
+        self.assertIsInstance(proposals, List)
+        if len(proposals) > 0:
+            self.assertIsInstance(proposals[0], str)
 
 
 if __name__ == '__main__':

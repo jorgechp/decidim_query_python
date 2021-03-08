@@ -12,10 +12,10 @@ class ParticipatoryProcessesReaderTest(unittest.TestCase):
     def test_process_query(self):
         decidim_connector: DecidimConnector = DecidimConnector(API_URL)
         reader: ParticipatoryProcessesReader = ParticipatoryProcessesReader(decidim_connector,  base_path="..")
-        participatory_processes = reader.process_query()
+        participatory_processes: List[str] = reader.process_query()
         self.assertIsInstance(participatory_processes, List)
         if len(participatory_processes) > 0:
-            self.assertIsInstance(participatory_processes[0], ParticipatoryProcess)
+            self.assertIsInstance(participatory_processes[0], str)
 
 
 if __name__ == '__main__':

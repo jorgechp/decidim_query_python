@@ -18,13 +18,13 @@ proposal_reader = ProposalReader(decidim_connector)
 comment_reader = CommentReader(decidim_connector)
 
 for partipatory_process in participatory_processes:
-    proposals_list = proposals_reader.process_query(partipatory_process.id)
+    proposals_list = proposals_reader.process_query(partipatory_process)
     for proposal in proposals_list:
-        proposal_full_info = proposal_reader.process_query(partipatory_process.id, proposal)
+        proposal_full_info = proposal_reader.process_query(partipatory_process, proposal)
         if proposal_full_info.has_comments:
             for comment_id in proposal_full_info.comments_ids:
                 comment_full_info = comment_reader.process_query(
-                    partipatory_process.id,
+                    partipatory_process,
                     proposal,
                     comment_id
                 )

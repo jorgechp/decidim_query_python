@@ -30,24 +30,18 @@ class ParticipatoryProcessesReader(AbstractDecidimReader):
         """
         super().__init__(decidim_connector, base_path + "/" + API_URL)
 
-    def process_query(self) -> List[ParticipatoryProcess]:
+    def process_query(self) -> List[str]:
         """
         Send the query to the API and extract a list of participatory processes.
-        :return: A list of participatory processes.
+        :return: A list of participatory processes ids.
         """
 
         component_filter: ParticipatoryProcessFilter = ParticipatoryProcessFilter()
         component_sort: ParticipatoryProcessSort = ParticipatoryProcessSort()
         response: dict = super().process_query_from_file({'filter': component_filter, 'order': component_sort})
 
-        participatory_processes: List[ParticipatoryProcess] = []
+        participatory_processes: List[str] = []
         for participatory_process_dict in response['participatoryProcesses']:
-            id: str = participatory_process_dict['id']
-            translations: [] = participatory_process_dict['title']['translations']
-
-            title: TranslatedField = TranslatedField.parse_from_gql(translations)
-            participatory_process: ParticipatoryProcess = ParticipatoryProcess(process_id=id,
-                                                                               title=title,
-                                                                               components=None)
-            participatory_processes.append(participatory_process)
+            participatory_process_id: str = participatory_process_dict['id']
+            participatory_processes.append(participatory_process_id)
         return participatory_processes
