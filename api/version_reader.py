@@ -6,7 +6,7 @@ from api.abstract_decidim_reader import AbstractDecidimReader
 from api.decidim_connector import DecidimConnector
 
 # Path to the query schema
-API_URL = 'queries\\version.graphql'
+API_URL = 'queries/version.graphql'
 
 
 class VersionReader(AbstractDecidimReader):
@@ -20,7 +20,7 @@ class VersionReader(AbstractDecidimReader):
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
-        super().__init__(decidim_connector, base_path + "\\" + API_URL)
+        super().__init__(decidim_connector, base_path + "/" + API_URL)
 
     def process_query(self) -> str:
         """

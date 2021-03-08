@@ -14,7 +14,7 @@ from model.participatory_process_sort import ParticipatoryProcessSort
 # Path to the query schema
 from model.translated_field import TranslatedField
 
-API_URL = 'queries\\participatory_processes.graphql'
+API_URL = 'queries/participatory_processes.graphql'
 
 
 class ParticipatoryProcessesReader(AbstractDecidimReader):
@@ -28,7 +28,7 @@ class ParticipatoryProcessesReader(AbstractDecidimReader):
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
-        super().__init__(decidim_connector, base_path + "\\" + API_URL)
+        super().__init__(decidim_connector, base_path + "/" + API_URL)
 
     def process_query(self) -> List[ParticipatoryProcess]:
         """
