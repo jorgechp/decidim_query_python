@@ -1,8 +1,6 @@
 """
 This Reader retrives a full Proposal information.
 """
-from typing import List
-
 from api.abstract_decidim_reader import AbstractDecidimReader
 from api.decidim_connector import DecidimConnector
 from model.elemental_type_element import ElementalTypeElement
@@ -11,7 +9,7 @@ from model.elemental_type_element import ElementalTypeElement
 from model.proposal import Proposal
 from model.translated_field import TranslatedField
 
-API_URL = 'queries\\proposal.graphql'
+API_URL = 'queries/proposal.graphql'
 
 
 class ProposalReader(AbstractDecidimReader):
@@ -25,9 +23,9 @@ class ProposalReader(AbstractDecidimReader):
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
-        super().__init__(decidim_connector, base_path + "\\" + API_URL)
+        super().__init__(decidim_connector, base_path + "/" + API_URL)
 
-    def process_query(self, participatory_process_id: str, proposal_id: str) -> Proposal:
+    def process_query(self, participatory_process_id: str, proposal_id: str) -> Proposal or None:
         """
         Send the query to the API and extract a list of proposals ids from a participatory space.
         :param participatory_process_id: The participatory process id.
@@ -41,28 +39,32 @@ class ProposalReader(AbstractDecidimReader):
                 'ID_PROPOSAL': ElementalTypeElement(proposal_id)
             })
 
+
         proposal_dict = response['participatoryProcess']['components'][0]['proposal']
-        title: TranslatedField = TranslatedField.parse_from_gql(proposal_dict['title']['translations'])
-        body: TranslatedField = TranslatedField.parse_from_gql(proposal_dict['body']['translations'])
-        has_comments: bool = proposal_dict['hasComments']
-        vote_count: int = proposal_dict['voteCount']
-        total_comments_count: int = proposal_dict['totalCommentsCount']
-        accept_new_comments: bool = proposal_dict['acceptsNewComments']
-        user_allowed_to_comment: bool = proposal_dict['userAllowedToComment']
-        comments_id_list = proposal_dict['comments']
+        if proposal_dict is not None:
+            title: TranslatedField = TranslatedField.parse_from_gql(proposal_dict['title']['translations'])
+            body: TranslatedField = TranslatedField.parse_from_gql(proposal_dict['body']['translations'])
+            has_comments: bool = proposal_dict['hasComments']
+            vote_count: int = proposal_dict['voteCount']
+            total_comments_count: int = proposal_dict['totalCommentsCount']
+            accept_new_comments: bool = proposal_dict['acceptsNewComments']
+            user_allowed_to_comment: bool = proposal_dict['userAllowedToComment']
+            comments_id_list = proposal_dict['comments']
 
-        comments_id = []
-        for comment_id in comments_id_list:
-            comments_id.append(comment_id['id'])
+            comments_id = []
+            for comment_id in comments_id_list:
+                comments_id.append(comment_id['id'])
 
-        new_proposal = Proposal(proposal_id,
-                                total_comments_count,
-                                title,
-                                body,
-                                vote_count,
-                                has_comments,
-                                comments_id,
-                                accept_new_comments,
-                                user_allowed_to_comment)
+            new_proposal = Proposal(proposal_id,
+                                    total_comments_count,
+                                    title,
+                                    body,
+                                    vote_count,
+                                    has_comments,
+                                    comments_id,
+                                    accept_new_comments,
+                                    user_allowed_to_comment)
 
-        return new_proposal
+            return new_proposal
+        else:
+            return None

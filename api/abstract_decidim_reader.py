@@ -19,8 +19,8 @@ class AbstractDecidimReader(ABC):
         self.__query_path = query_schema
         self.decidim_connector = decidim_connector
 
-    def process_query_from_file(self, arguments: Dict[str, AbstractApiElement] = {}) -> dict:
+    def process_query_from_file(self, arguments: Dict[str, AbstractApiElement] = {}):
         return self.decidim_connector.execute_query_from_file(self.__query_path, arguments)
 
-    def process_query(self, query: str) -> dict:
+    def process_query(self, query: str) :
         return self.decidim_connector.execute_query(query)

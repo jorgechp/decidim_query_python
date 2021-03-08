@@ -5,18 +5,12 @@ from typing import List
 
 from api.abstract_decidim_reader import AbstractDecidimReader
 from api.decidim_connector import DecidimConnector
-from model.comment import Comment
 from model.elemental_type_element import ElementalTypeElement
-from model.participatory_process import ParticipatoryProcess
-
-from model.participatory_process_filter import ParticipatoryProcessFilter
-from model.participatory_process_sort import ParticipatoryProcessSort
 
 # Path to the query schema
 from model.proposal import Proposal
-from model.translated_field import TranslatedField
 
-API_URL = 'queries\\proposals.graphql'
+API_URL = 'queries/proposals.graphql'
 
 
 class ProposalsReader(AbstractDecidimReader):
@@ -30,7 +24,7 @@ class ProposalsReader(AbstractDecidimReader):
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
-        super().__init__(decidim_connector, base_path + "\\" + API_URL)
+        super().__init__(decidim_connector, base_path + "/" + API_URL)
 
     def process_query(self, participatory_process_id: str) -> List[str]:
         """
