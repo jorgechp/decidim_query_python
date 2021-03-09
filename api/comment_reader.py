@@ -33,6 +33,7 @@ class CommentReader(AbstractDecidimReader):
         Send the query to the API and extract a list of proposals ids from a participatory space.
         :param participatory_process_id: The participatory process id.
         :param proposal_id: The proposal id.
+        :param id_comment: The id of the comment to retrieve.
         :return: A list of proposals ids.
         """
 
@@ -47,6 +48,7 @@ class CommentReader(AbstractDecidimReader):
             comment_dict = response['participatoryProcess']['components'][0]['proposal']['comments'][0]
             alignment: int = comment_dict['alignment']
             body: str = comment_dict['body']
+            comment_type: str = comment_dict['type']
             down_votes: int = comment_dict['downVotes']
             up_votes: int = comment_dict['upVotes']
             comments_id_list = comment_dict['comments']
@@ -55,7 +57,13 @@ class CommentReader(AbstractDecidimReader):
             for comment_id in comments_id_list:
                 comments_id.append(comment_id['id'])
 
-            new_comment: Comment = Comment(body, alignment, down_votes, up_votes, comments_id)
+            new_comment: Comment = Comment(id_comment,
+                                           body,
+                                           alignment,
+                                           down_votes,
+                                           up_votes,
+                                           comment_type,
+                                           comments_id)
             return new_comment
         except IndexError:
             return None

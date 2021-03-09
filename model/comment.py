@@ -20,6 +20,10 @@ class Comment(AbstractApiElement):
         pass
 
     @property
+    def type(self) -> str:
+        return self.__type
+
+    @property
     def body(self) -> str:
         return self.__body
 
@@ -39,11 +43,19 @@ class Comment(AbstractApiElement):
     def up_vote(self) -> int:
         return self.__up_votes
 
-    def __init__(self, body: str, alignment: int, down_votes: int, up_votes: int, comments_id: List[str]) -> None:
+    def __init__(self,
+                 comment_id: str,
+                 body: str,
+                 alignment: int,
+                 down_votes: int,
+                 up_votes: int,
+                 type: str,
+                 comments_id: List[str]) -> None:
+
+        self.__type: str = type
+        self.__comment_id: str = comment_id
         self.__body: str = body
         self.__alignment: int = alignment
         self.__down_votes: int = down_votes
         self.__up_votes: int = up_votes
         self.__comments_id: List[str] = comments_id
-
-
