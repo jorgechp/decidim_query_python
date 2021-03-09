@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import List
+
 from model.abstract_api_element import AbstractApiElement
 
 
@@ -18,6 +19,10 @@ class Comment(AbstractApiElement):
         :return: A Comment
         """
         pass
+
+    @property
+    def comment_id(self) -> str:
+        return self.__comment_id
 
     @property
     def type(self) -> str:
@@ -40,7 +45,7 @@ class Comment(AbstractApiElement):
         return self.__down_votes
 
     @property
-    def up_vote(self) -> int:
+    def up_votes(self) -> int:
         return self.__up_votes
 
     def __init__(self,

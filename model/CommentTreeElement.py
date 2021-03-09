@@ -23,6 +23,10 @@ class CommentTreeElement:
     def parent(self) -> CommentTreeElement or None:
         return self.__parent
 
+    @property
+    def childrens(self) -> Set[CommentTreeElement]:
+        return self.__children
+
     def is_root(self) -> bool:
         """
         Checks if the current object is the root node. A root node does not have any parent.
@@ -33,6 +37,8 @@ class CommentTreeElement:
     def __init__(self, comment: Comment or None, parent: CommentTreeElement or None) -> None:
         self.__comment = comment
         self.__parent = parent
+        if parent is not None:
+            parent.add_children(self)
         self.__children: Set[CommentTreeElement] = set()
 
     def add_children(self, new_child: CommentTreeElement) -> None:
