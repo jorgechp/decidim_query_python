@@ -13,20 +13,20 @@ decidim_connector = DecidimConnector(API_URL)
 # print(version)
 
 participatory_processes_reader = ParticipatoryProcessesReader(decidim_connector)
-participatory_processes = participatory_processes_reader.process_query()
+participatory_processes = participatory_processes_reader.execute()
 
 proposals_reader = ProposalsReader(decidim_connector)
 proposal_reader = ProposalReader(decidim_connector)
 comment_reader = CommentReader(decidim_connector)
 
 for partipatory_process in participatory_processes:
-    proposals_list = proposals_reader.process_query(partipatory_process)
+    proposals_list = proposals_reader.execute(partipatory_process)
     for proposal in proposals_list:
-        proposal_full_info = proposal_reader.process_query(partipatory_process, proposal)
+        proposal_full_info = proposal_reader.execute(partipatory_process, proposal)
         time.sleep(3)
         if proposal_full_info.has_comments:
             for comment_id in proposal_full_info.comments_ids:
-                comment_full_info = comment_reader.process_query(
+                comment_full_info = comment_reader.execute(
                     partipatory_process,
                     proposal,
                     comment_id

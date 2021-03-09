@@ -8,10 +8,10 @@ API_URL = "https://meta.decidim.org/api"
 
 
 class ParticipatoryProcessesReaderTest(unittest.TestCase):
-    def test_process_query(self):
+    def test_execute(self):
         decidim_connector: DecidimConnector = DecidimConnector(API_URL)
         reader: ParticipatoryProcessesReader = ParticipatoryProcessesReader(decidim_connector,  base_path="..")
-        participatory_processes: List[str] = reader.process_query()
+        participatory_processes: List[str] = reader.execute()
         self.assertIsInstance(participatory_processes, List)
         if len(participatory_processes) > 0:
             self.assertIsInstance(participatory_processes[0], str)

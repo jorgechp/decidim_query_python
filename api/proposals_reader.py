@@ -26,7 +26,7 @@ class ProposalsReader(AbstractDecidimReader):
         """
         super().__init__(decidim_connector, base_path + "/" + API_URL)
 
-    def process_query(self, participatory_process_id: str) -> List[str]:
+    def execute(self, participatory_process_id: str) -> List[str]:
         """
         Send the query to the API and extract a list of proposals ids from a participatory space.
         :param participatory_process_id: The participatory process id.

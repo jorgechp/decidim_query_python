@@ -22,5 +22,8 @@ class AbstractDecidimReader(ABC):
     def process_query_from_file(self, arguments: Dict[str, AbstractApiElement] = {}):
         return self.decidim_connector.execute_query_from_file(self.__query_path, arguments)
 
-    def process_query(self, query: str) :
+    def process_query(self, query: str, arguments: Dict[str, AbstractApiElement] = {}):
         return self.decidim_connector.execute_query(query)
+
+    def execute(self, *args, **kwargs):
+        pass

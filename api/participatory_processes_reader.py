@@ -30,7 +30,7 @@ class ParticipatoryProcessesReader(AbstractDecidimReader):
         """
         super().__init__(decidim_connector, base_path + "/" + API_URL)
 
-    def process_query(self) -> List[str]:
+    def execute(self) -> List[str]:
         """
         Send the query to the API and extract a list of participatory processes.
         :return: A list of participatory processes ids.

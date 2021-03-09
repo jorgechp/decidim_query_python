@@ -22,7 +22,7 @@ class VersionReader(AbstractDecidimReader):
         """
         super().__init__(decidim_connector, base_path + "/" + API_URL)
 
-    def process_query(self) -> str:
+    def execute(self) -> str:
         """
         Send the query to the API and parse the dictionary to extract the version.
         :return: The version of the Decidim Platform.

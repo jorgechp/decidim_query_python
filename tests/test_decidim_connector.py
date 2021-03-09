@@ -5,7 +5,7 @@ from api.decidim_connector import DecidimConnector
 API_URL = "https://meta.decidim.org/api"
 
 
-class DecidimReaderTest(unittest.TestCase):
+class DecidimConnectrTest(unittest.TestCase):
     def test_execute_query(self):
         decidim_reader: DecidimConnector = DecidimConnector(API_URL)
         response = decidim_reader.execute_query("{decidim {version}}")

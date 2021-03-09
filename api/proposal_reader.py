@@ -25,12 +25,12 @@ class ProposalReader(AbstractDecidimReader):
         """
         super().__init__(decidim_connector, base_path + "/" + API_URL)
 
-    def process_query(self, participatory_process_id: str, proposal_id: str) -> Proposal or None:
+    def execute(self, participatory_process_id: str,  proposal_id: str) -> Proposal or None:
         """
         Send the query to the API and extract a list of proposals ids from a participatory space.
         :param participatory_process_id: The participatory process id.
         :param proposal_id: The proposal id.
-        :return: A list of proposals ids.
+        :return: A list of proposals ids, or None if the proposal doesn't exists.
         """
 
         response: dict = super().process_query_from_file(
@@ -38,7 +38,6 @@ class ProposalReader(AbstractDecidimReader):
                 'ID_PARTICIPATORY_PROCESS': ElementalTypeElement(participatory_process_id),
                 'ID_PROPOSAL': ElementalTypeElement(proposal_id)
             })
-
 
         proposal_dict = response['participatoryProcess']['components'][0]['proposal']
         if proposal_dict is not None:
