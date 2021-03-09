@@ -1,7 +1,6 @@
 """
 This Reader retrives a full Proposal information.
 """
-from typing import List
 
 from api.abstract_decidim_reader import AbstractDecidimReader
 from api.decidim_connector import DecidimConnector
@@ -9,8 +8,6 @@ from model.comment import Comment
 from model.elemental_type_element import ElementalTypeElement
 
 # Path to the query schema
-from model.proposal import Proposal
-from model.translated_field import TranslatedField
 
 API_URL = 'queries/comment.graphql'
 
@@ -49,6 +46,7 @@ class CommentReader(AbstractDecidimReader):
             alignment: int = comment_dict['alignment']
             body: str = comment_dict['body']
             comment_type: str = comment_dict['type']
+            created_at: str = comment_dict['createdAt']
             down_votes: int = comment_dict['downVotes']
             up_votes: int = comment_dict['upVotes']
             comments_id_list = comment_dict['comments']
@@ -60,6 +58,7 @@ class CommentReader(AbstractDecidimReader):
             new_comment: Comment = Comment(id_comment,
                                            body,
                                            alignment,
+                                           created_at,
                                            down_votes,
                                            up_votes,
                                            comment_type,

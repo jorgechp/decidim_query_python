@@ -1,6 +1,5 @@
 from typing import List
 
-from model.comment import Comment
 from model.abstract_api_element import AbstractApiElement
 from model.translated_field import TranslatedField
 
@@ -27,6 +26,10 @@ class Proposal(AbstractApiElement):
         return self.__title
 
     @property
+    def created_at(self) -> str:
+        return self.__created_at
+
+    @property
     def body(self) -> TranslatedField:
         return self.__body
 
@@ -49,6 +52,7 @@ class Proposal(AbstractApiElement):
     def __init__(self, proposal_id: str,
                  total_comments_count: int,
                  title: TranslatedField,
+                 created_at: str,
                  body: TranslatedField,
                  vote_count: int,
                  has_comments: bool,
@@ -58,6 +62,7 @@ class Proposal(AbstractApiElement):
         self.__proposal_id: str = proposal_id
         self.__total_comments_count: int = total_comments_count
         self.__title: TranslatedField = title
+        self.__created_at: str = created_at
         self.__body: TranslatedField = body
         self.__vote_count: int = vote_count
         self.__has_comments: bool = has_comments

@@ -41,6 +41,10 @@ class Comment(AbstractApiElement):
         return self.__comments_id
 
     @property
+    def created_at(self) -> str:
+        return self.__created_at
+
+    @property
     def down_votes(self) -> int:
         return self.__down_votes
 
@@ -52,6 +56,7 @@ class Comment(AbstractApiElement):
                  comment_id: str,
                  body: str,
                  alignment: int,
+                 created_at: str,
                  down_votes: int,
                  up_votes: int,
                  type: str,
@@ -61,6 +66,7 @@ class Comment(AbstractApiElement):
         self.__comment_id: str = comment_id
         self.__body: str = body
         self.__alignment: int = alignment
+        self.__created_at: str = created_at
         self.__down_votes: int = down_votes
         self.__up_votes: int = up_votes
         self.__comments_id: List[str] = comments_id

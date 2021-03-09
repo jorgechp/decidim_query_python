@@ -1,4 +1,5 @@
 from model.abstract_api_element import AbstractApiElement
+from model.translated_field import TranslatedField
 
 
 class ComponentInterface(AbstractApiElement):
@@ -14,14 +15,14 @@ class ComponentInterface(AbstractApiElement):
         return self.__id
 
     @property
-    def name(self) -> str:
+    def name(self) -> TranslatedField:
         return self.__name
 
     @property
     def weight(self) -> int:
         return self.__weight
 
-    def __init__(self, component_id: str, name: str, weight: int) -> None:
+    def __init__(self, component_id: str, name: TranslatedField, weight: int) -> None:
         self.__id: str = component_id
-        self.__name: str = name
+        self.__name: TranslatedField = name
         self.__weight: int = weight

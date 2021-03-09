@@ -45,6 +45,7 @@ class ProposalReader(AbstractDecidimReader):
             body: TranslatedField = TranslatedField.parse_from_gql(proposal_dict['body']['translations'])
             has_comments: bool = proposal_dict['hasComments']
             vote_count: int = proposal_dict['voteCount']
+            created_at: str = proposal_dict['createdAt']
             total_comments_count: int = proposal_dict['totalCommentsCount']
             accept_new_comments: bool = proposal_dict['acceptsNewComments']
             user_allowed_to_comment: bool = proposal_dict['userAllowedToComment']
@@ -57,6 +58,7 @@ class ProposalReader(AbstractDecidimReader):
             new_proposal = Proposal(proposal_id,
                                     total_comments_count,
                                     title,
+                                    created_at,
                                     body,
                                     vote_count,
                                     has_comments,

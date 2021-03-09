@@ -9,6 +9,7 @@
                     alignment,
                     body,
                     type,
+                    createdAt,
                     downVotes,
                     upVotes
                     comments{

@@ -8,10 +8,6 @@ from api.decidim_connector import DecidimConnector
 from model.component_interface import ComponentInterface
 from model.elemental_type_element import ElementalTypeElement
 from model.participatory_process import ParticipatoryProcess
-
-from model.participatory_process_filter import ParticipatoryProcessFilter
-from model.participatory_process_sort import ParticipatoryProcessSort
-
 # Path to the query schema
 from model.translated_field import TranslatedField
 
@@ -43,6 +39,7 @@ class ParticipatoryProcessReader(AbstractDecidimReader):
         if participatory_process_dict is not None:
             translations: [] = participatory_process_dict['title']['translations']
             components_dict: [dict] = participatory_process_dict['components']
+            created_at: str = participatory_process_dict['createdAt']
             components: List[ComponentInterface] = []
 
             for component in components_dict:
@@ -56,6 +53,7 @@ class ParticipatoryProcessReader(AbstractDecidimReader):
             title: TranslatedField = TranslatedField.parse_from_gql(translations)
             participatory_process: ParticipatoryProcess = ParticipatoryProcess(process_id=participatory_process_id,
                                                                                title=title,
+                                                                               created_at=created_at,
                                                                                components=components)
             return participatory_process
         else:

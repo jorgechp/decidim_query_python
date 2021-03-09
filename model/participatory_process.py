@@ -19,10 +19,19 @@ class ParticipatoryProcess(AbstractApiElement):
         return self.__title
 
     @property
+    def created_at(self) -> str:
+        return self.__created_at
+
+    @property
     def components(self) -> List[ComponentInterface] or None:
         return self.__components
 
-    def __init__(self, process_id: str, title: TranslatedField, components: List[ComponentInterface] or None) -> None:
+    def __init__(self,
+                 process_id: str,
+                 title: TranslatedField,
+                 created_at: str,
+                 components: List[ComponentInterface] or None) -> None:
         self.__id: str = process_id
+        self.__created_at: str = created_at
         self.__title: TranslatedField = title
         self.__components: List[ComponentInterface] = components
