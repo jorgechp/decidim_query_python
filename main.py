@@ -20,7 +20,7 @@ participatory_process_filename = "participatory_process_comments.csv"
 proposal_filename = "proposal_comments.csv"
 comment_filename = "output_comments.csv"
 
-SLEEPING_TIME = 15
+SLEEPING_TIME = 20
 
 participatory_processes_reader = ParticipatoryProcessesReader(decidim_connector)
 participatory_processes = participatory_processes_reader.execute()
@@ -119,7 +119,7 @@ for partipatory_process in participatory_processes:
         print("\t|-Analyzing proposal #{}".format(proposal_full_info.proposal_id))
         proposal_writer.writerow([partipatory_process,
                                   proposal_full_info.proposal_id,
-                                  proposal_full_info.title,
+                                  proposal_full_info.title.get_translation(proposal_full_info.title.locales[0]),
                                   proposal_full_info.created_at])
         time.sleep(SLEEPING_TIME)
         if proposal_full_info.has_comments:
