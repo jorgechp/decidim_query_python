@@ -1,0 +1,82 @@
+# This query retrieves all the comments made on proposals in participatory proposals.
+
+# We need to adjust the depth of comments Hierarchy
+
+fragment CommentsDataFragment on Comment {
+    #
+    #This fragment contains the basic information we want to recover from a DataFragment
+    #
+    id,
+    alignment,
+    body,
+    type,
+    createdAt,
+    downVotes,
+    upVotes
+    comments{
+        id
+    }
+}
+
+fragment CommentsHierarchy on Comment {
+# This fragment contains the desired recursivity level of a comment hierarchy. If we wish to retrieve more comments, whe need
+# to add a new level
+# In order to add a new level, we need to push the following code:
+#
+#  comments{
+# ...CommentsDataFragment
+# }
+#
+#
+%RECURSIVE_HIERARCHY%
+}
+
+{
+#
+#
+#This query retrieves all comments from proposales made on participatory processes.
+#
+#
+participatoryProcesses(filter: {}, order: { publishedAt: "asc" }) {
+id,
+createdAt,
+title {
+translations {
+locale,
+text
+}
+}
+components(filter: { type: "Proposals" }) {
+... on Proposals {
+proposals {
+edges {
+node {
+id
+title{
+translations {
+locale,
+text
+}
+}
+body{
+translations {
+locale,
+text
+}
+}
+createdAt,
+hasComments,
+voteCount,
+totalCommentsCount,
+acceptsNewComments,
+userAllowedToComment,
+comments {
+...CommentsHierarchy
+}
+}
+}
+}
+}
+}
+}
+}

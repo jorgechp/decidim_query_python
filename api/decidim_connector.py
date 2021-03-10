@@ -23,8 +23,8 @@ class DecidimConnector:
 
         :param decidim_api_url: The url of the API endpoint.
         """
-        transport = AIOHTTPTransport(url=decidim_api_url)
-        self.__client = Client(transport=transport, fetch_schema_from_transport=True)
+        transport = AIOHTTPTransport(url=decidim_api_url, timeout=60)
+        self.__client = Client(transport=transport, fetch_schema_from_transport=True, execute_timeout=60)
 
     def execute_query(self, query: str) -> dict:
         """
