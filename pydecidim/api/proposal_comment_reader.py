@@ -9,26 +9,26 @@ from pydecidim.model.elemental_type_element import ElementalTypeElement
 
 # Path to the query schema
 
-QUERY_PATH = 'pydecidim/queries/comment.graphql'
+QUERY_PATH = 'pydecidim/queries/participatory_process_comment.graphql'
 
 
-class CommentReader(AbstractDecidimReader):
+class ProposalProcessCommentReader(AbstractDecidimReader):
     """
     This reader retrieves a Proposal from Decidim.
     """
 
-    def __init__(self, decidim_connector: DecidimConnector, base_path="."):
+    def __init__(self, query_path: str, decidim_connector: DecidimConnector, base_path="."):
         """
 
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
-        super().__init__(decidim_connector, base_path + "/" + QUERY_PATH)
+        super().__init__(decidim_connector, base_path + "/" + query_path)
 
-    def execute(self, participatory_process_id: str, proposal_id: str, id_comment: str) -> Comment or None:
+    def execute(self, participatory_space_id: str, proposal_id: str, id_comment: str) -> Comment or None:
         """
         Send the query to the API and extract a list of proposals ids from a participatory space.
-        :param participatory_process_id: The participatory process id.
+        :param participatory_space_id: The participatory process id.
         :param proposal_id: The proposal id.
         :param id_comment: The id of the comment to retrieve.
         :return: A list of proposals ids.
@@ -36,7 +36,7 @@ class CommentReader(AbstractDecidimReader):
 
         response: dict = super().process_query_from_file(
             {
-                'ID_PARTICIPATORY_PROCESS': ElementalTypeElement(participatory_process_id),
+                'ID_PARTICIPATORY_PROCESS': ElementalTypeElement(participatory_space_id),
                 'ID_PROPOSAL': ElementalTypeElement(proposal_id),
                 'ID_COMMENT': ElementalTypeElement(id_comment),
             })

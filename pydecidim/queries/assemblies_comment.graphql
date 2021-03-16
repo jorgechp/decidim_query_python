@@ -1,0 +1,23 @@
+#This query retrieves a Comment from an specific Proposal.
+
+{
+  assemblies(id: %ID_PARTICIPATORY_PROCESS%) {
+    components(filter: { type: "Proposals" }){
+        ... on Proposals{
+           	 proposal(id: %ID_PROPOSAL%){
+                   comments(singleCommentId: "%ID_COMMENT%"){
+                    alignment,
+                    body,
+                    type,
+                    createdAt,
+                    downVotes,
+                    upVotes
+                    comments{
+                            id
+                    }
+                  }
+          		}
+            }
+          }
+      }
+}
