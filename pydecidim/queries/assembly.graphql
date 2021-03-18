@@ -1,0 +1,7 @@
+#This query retrieves information about an specific assembly
+
+{
+    assembly(id: "%ID_ASSEMBLY%"){
+        id
+    }
+}

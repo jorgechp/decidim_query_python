@@ -1,0 +1,7 @@
+#This query retrieves ids of assemblies.
+
+{
+    assemblies{
+        id
+    }
+}

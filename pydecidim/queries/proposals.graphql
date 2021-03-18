@@ -5,9 +5,11 @@
     components(filter: { type: "Proposals" }){
         ... on Proposals{
             proposals{
-              nodes{
-                id
-              }
+                edges{
+                    node{
+                        id
+                    }
+                }
             }
           }
         }
