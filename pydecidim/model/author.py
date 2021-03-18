@@ -7,7 +7,7 @@ class Author(AbstractApiElement):
     """
     Represents a Decidim user (Author)
 
-    https://meta.decidim.org/api/docs#Author
+    https://www.decidim.barcelona/api/docs#Author
     """
 
     @staticmethod

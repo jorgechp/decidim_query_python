@@ -4,7 +4,7 @@ from typing import List
 from pydecidim.api.abstract_decidim_reader import DecidimConnector
 from pydecidim.api.participatory_processes_reader import ParticipatoryProcessesReader
 
-QUERY_PATH = "https://meta.decidim.org/api"
+QUERY_PATH = "https://www.decidim.barcelona/api"
 
 
 class ParticipatoryProcessesReaderTest(unittest.TestCase):

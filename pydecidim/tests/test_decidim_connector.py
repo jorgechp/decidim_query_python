@@ -2,7 +2,7 @@ import unittest
 
 from pydecidim.api.decidim_connector import DecidimConnector
 
-QUERY_PATH = "https://meta.decidim.org/api"
+QUERY_PATH = "https://www.decidim.barcelona/api"
 
 
 class DecidimConnectrTest(unittest.TestCase):

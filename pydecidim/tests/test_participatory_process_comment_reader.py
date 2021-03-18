@@ -1,10 +1,10 @@
 import unittest
 
-from pydecidim.api.participatory_process_comment_reader import ParticipatoryProcessCommentReader
 from pydecidim.api.decidim_connector import DecidimConnector
+from pydecidim.api.participatory_process_comment_reader import ParticipatoryProcessCommentReader
 from pydecidim.model.comment import Comment
 
-QUERY_PATH = "https://meta.decidim.org/api"
+QUERY_PATH = "https://www.decidim.barcelona/api"
 
 
 class ProposalReaderTest(unittest.TestCase):

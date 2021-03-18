@@ -4,7 +4,7 @@ from pydecidim.api.assemblies_comment_reader import AssembliesProcessCommentRead
 from pydecidim.api.decidim_connector import DecidimConnector
 from pydecidim.model.comment import Comment
 
-QUERY_PATH = "https://meta.decidim.org/api"
+QUERY_PATH = "https://www.decidim.barcelona/api"
 
 
 class ProposalReaderTest(unittest.TestCase):

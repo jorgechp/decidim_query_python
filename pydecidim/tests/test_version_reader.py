@@ -3,7 +3,7 @@ import unittest
 from pydecidim.api.decidim_connector import DecidimConnector
 from pydecidim.api.version_reader import VersionReader
 
-QUERY_PATH = "https://meta.decidim.org/api"
+QUERY_PATH = "https://www.decidim.barcelona/api"
 
 
 class VersionReaderTest(unittest.TestCase):
