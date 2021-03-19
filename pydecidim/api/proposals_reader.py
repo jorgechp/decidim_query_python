@@ -35,7 +35,7 @@ class ProposalsReader(AbstractDecidimReader):
         response: dict = super().process_query_from_file({'id': ElementalTypeElement(participatory_process_id)})
 
         proposals_id: List[Proposal] = []
-        for proposal_dict in response['participatoryProcess']['components'][0]['proposals']['nodes']:
-            proposal_id: str = proposal_dict['id']
+        for proposal_dict in response['participatoryProcess']['components'][0]['proposals']['edges']:
+            proposal_id: str = proposal_dict['node']['id']
             proposals_id.append(proposal_id)
         return proposals_id

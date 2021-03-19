@@ -13,7 +13,7 @@ class ProposalReaderTest(unittest.TestCase):
         reader: ParticipatoryProcessCommentReader \
             = ParticipatoryProcessCommentReader(decidim_connector, base_path="../..")
         # We use the participatory process #5 on Decidim.org api and the Proposal #12040
-        comment: Comment = reader.execute("5", "12040", "2")
+        comment: Comment = reader.execute("5", "10953", "2")
         self.assertIsNone(comment)
 
     def test_execute_exists(self):
@@ -21,7 +21,7 @@ class ProposalReaderTest(unittest.TestCase):
         reader: ParticipatoryProcessCommentReader \
             = ParticipatoryProcessCommentReader(decidim_connector, base_path="../..")
         # We use the participatory space #5 on Decidim.org api and the Proposal #12888
-        comment: Comment = reader.execute("5", "12888", "20287")
+        comment: Comment = reader.execute("4", "11330", "19008")
         self.assertIsInstance(comment, Comment)
 
 

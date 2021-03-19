@@ -11,15 +11,15 @@ class ProposalReaderTest(unittest.TestCase):
     def test_execute_not_exists(self):
         decidim_connector: DecidimConnector = DecidimConnector(QUERY_PATH)
         reader: ProposalReader = ProposalReader(decidim_connector, base_path="../..")
-        # We use the participatory process #40 on Decidim.org api and the Proposal #12040
-        proposal: Proposal = reader.execute("40", "1")
+        # We use the participatory process #48 on Decidim.org api and the Proposal #12040
+        proposal: Proposal = reader.execute("48", "1")
         self.assertIsNone(proposal)
 
     def test_execute(self):
         decidim_connector: DecidimConnector = DecidimConnector(QUERY_PATH)
         reader: ProposalReader = ProposalReader(decidim_connector, base_path="../..")
-        # We use the participatory process #40 on Decidim.org api and the Proposal #12040
-        proposal: Proposal = reader.execute("40", "12040")
+        # We use the participatory process #5 on Decidim.org api and the Proposal #10953
+        proposal: Proposal = reader.execute("5", "10953")
         self.assertIsInstance(proposal, Proposal)
 
 

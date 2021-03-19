@@ -12,7 +12,7 @@ class ProposalsReaderTest(unittest.TestCase):
         decidim_connector: DecidimConnector = DecidimConnector(QUERY_PATH)
         reader: ProposalsReader = ProposalsReader(decidim_connector, base_path="../..")
         # We use the participatory process #40.
-        proposals: List[str] = reader.execute("40")
+        proposals: List[str] = reader.execute("48")
         self.assertIsInstance(proposals, List)
         if len(proposals) > 0:
             self.assertIsInstance(proposals[0], str)

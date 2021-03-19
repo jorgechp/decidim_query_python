@@ -18,13 +18,17 @@ class ProposalProcessCommentReader(AbstractDecidimReader):
     This reader retrieves a Proposal from Decidim.
     """
 
-    def __init__(self, query_path: str, decidim_connector: DecidimConnector, base_path="."):
+    def __init__(self, query_path: str,
+                 decidim_connector: DecidimConnector,
+                 participatory_space_name: str,
+                 base_path="."):
         """
 
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
         super().__init__(decidim_connector, base_path + "/" + query_path)
+        self.__participatory_space_name: str = participatory_space_name
 
     def execute(self, participatory_space_id: str, proposal_id: str, comment_id: str) -> Comment or None:
         """
@@ -43,7 +47,7 @@ class ProposalProcessCommentReader(AbstractDecidimReader):
             })
 
         try:
-            comment_dict = response['participatoryProcess']['components'][0]['proposal']['comments'][0]
+            comment_dict = response[self.__participatory_space_name]['components'][0]['proposal']['comments'][0]
             accepts_new_comments: bool = comment_dict['acceptsNewComments']
             alignment: int = comment_dict['alignment']
             already_reported: bool = comment_dict['alreadyReported']

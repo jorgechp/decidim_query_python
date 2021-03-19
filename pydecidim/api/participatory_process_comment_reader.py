@@ -23,4 +23,7 @@ class ParticipatoryProcessCommentReader(ProposalProcessCommentReader):
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
-        super().__init__(query_path=QUERY_PATH, decidim_connector=decidim_connector, base_path=base_path + "/")
+        super().__init__(query_path=QUERY_PATH,
+                         decidim_connector=decidim_connector,
+                         participatory_space_name='participatoryProcess',
+                         base_path=base_path + "/")
