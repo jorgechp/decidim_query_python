@@ -10,7 +10,7 @@ from pydecidim.api.proposal_comment_reader import ProposalProcessCommentReader
 QUERY_PATH = 'pydecidim/queries/assemblies_comment.graphql'
 
 
-class AssembliesProcessCommentReader(ProposalProcessCommentReader):
+class AssembliesCommentReader(ProposalProcessCommentReader):
     """
     This reader retrieves a Proposal from Decidim.
     """

@@ -1,21 +1,21 @@
 """
-This Reader retrives a list of Participatory processes from Decidim.
+This Reader retrives a full Proposal information.
 """
 from typing import List
 
 from pydecidim.api.abstract_decidim_reader import AbstractDecidimReader
 from pydecidim.api.decidim_connector import DecidimConnector
+
+# Path to the query schema
 from pydecidim.model.participatory_process_filter import ParticipatorySpaceFilter
 from pydecidim.model.participatory_process_sort import ParticipatorySpaceSort
 
-# Path to the query schema
-
-QUERY_PATH = 'pydecidim/queries/participatory_processes.graphql'
+QUERY_PATH = 'pydecidim/queries/assemblies.graphql'
 
 
-class ParticipatoryProcessesReader(AbstractDecidimReader):
+class AssembliesReader(AbstractDecidimReader):
     """
-    This reader retrieves list of Participatory processes from Decidim.
+    This reader retrieves a Proposal from Decidim.
     """
 
     def __init__(self, decidim_connector: DecidimConnector, base_path="."):
@@ -37,7 +37,7 @@ class ParticipatoryProcessesReader(AbstractDecidimReader):
         response: dict = super().process_query_from_file({'filter': component_filter, 'order': component_sort})
 
         participatory_processes: List[str] = []
-        for participatory_process_dict in response['participatoryProcesses']:
+        for participatory_process_dict in response['assemblies']:
             participatory_process_id: str = participatory_process_dict['id']
             participatory_processes.append(participatory_process_id)
         return participatory_processes

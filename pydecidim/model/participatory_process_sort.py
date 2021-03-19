@@ -1,9 +1,9 @@
 from pydecidim.model.abstract_api_element import AbstractApiElement
 
 
-class ParticipatoryProcessSort(AbstractApiElement):
+class ParticipatorySpaceSort(AbstractApiElement):
     """
-    Represents a ParticipatoryProcessSort from the Decidim API.
+    Represents a ParticipatorySpaceSort from the Decidim API.
     """
 
     @property

@@ -1,7 +1,7 @@
 #This query retrieves ids of assemblies.
 
 {
-    assemblies{
+    assemblies(filter: {%FILTER%}, order: {%ORDER%}){
         id
     }
 }

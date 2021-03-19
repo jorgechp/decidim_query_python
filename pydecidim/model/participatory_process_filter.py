@@ -1,9 +1,9 @@
 from pydecidim.model.abstract_api_element import AbstractApiElement
 
 
-class ParticipatoryProcessFilter(AbstractApiElement):
+class ParticipatorySpaceFilter(AbstractApiElement):
     """
-    Represents a ParticipatoryProcessFilter from the Decidim API.
+    Represents a ParticipatorySpaceFilter from the Decidim API.
     """
 
     @property
