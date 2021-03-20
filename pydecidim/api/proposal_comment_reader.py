@@ -47,13 +47,9 @@ class ProposalProcessCommentReader(ParticipatorySpaceReader):
 
         proposals = response[super().participatory_space_name]['components']
         proposals = [comment for comment in proposals if comment['proposal'] is not None]
-        if (len(proposals) > 1):
-            print("dsfsfdsdf")
+
         for proposal in proposals:
             comment_dict = proposal['proposal']['comments'][0]
-            if (len(proposal['proposal']['comments']) > 1):
-                print("WARnING: THERE WAS MORE THAN ONE COMMENT")
-
             accepts_new_comments: bool = comment_dict['acceptsNewComments']
             alignment: int = comment_dict['alignment']
             already_reported: bool = comment_dict['alreadyReported']

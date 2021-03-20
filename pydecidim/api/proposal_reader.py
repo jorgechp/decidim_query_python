@@ -42,8 +42,6 @@ class ProposalReader(ParticipatorySpaceReader):
 
         proposals = response[super().participatory_space_name]['components']
         proposals = [comment for comment in proposals if comment['proposal'] is not None]
-        if len(proposals) > 1:
-            print("WARNING")
         for proposal in proposals:
             proposal_dict = proposal['proposal']
             if proposal_dict is not None:
