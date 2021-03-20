@@ -1,17 +1,18 @@
 #This query retrieves a Proposal from an specific Participatory Space.
 
 {
-  participatoryProcess(id: %ID%) {
-    components(filter: { type: "Proposals" }){
-        ... on Proposals{
-            proposals{
-                edges{
-                    node{
-                        id
-                    }
-                }
-            }
-          }
+%PARTICIPATORY_SPACE_NAME%(id: %ID%) {
+id
+components(filter: { type: "Proposals" }){
+... on Proposals{
+proposals{
+edges{
+node{
+id
+}
+}
+}
+}
         }
     }
 }

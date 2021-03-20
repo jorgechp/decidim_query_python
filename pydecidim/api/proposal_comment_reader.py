@@ -1,8 +1,7 @@
 """
 This Reader retrives a full Proposal information.
 """
-
-from pydecidim.api.abstract_decidim_reader import AbstractDecidimReader
+from pydecidim.api.ParticipatorySpaceReader import ParticipatorySpaceReader
 from pydecidim.api.decidim_connector import DecidimConnector
 from pydecidim.model.author import Author
 from pydecidim.model.comment import Comment
@@ -10,15 +9,15 @@ from pydecidim.model.elemental_type_element import ElementalTypeElement
 
 # Path to the query schema
 
-QUERY_PATH = 'pydecidim/queries/participatory_process_comment.graphql'
+QUERY_PATH = 'pydecidim/queries/process_comment.graphql'
 
 
-class ProposalProcessCommentReader(AbstractDecidimReader):
+class ProposalProcessCommentReader(ParticipatorySpaceReader):
     """
     This reader retrieves a Proposal from Decidim.
     """
 
-    def __init__(self, query_path: str,
+    def __init__(self,
                  decidim_connector: DecidimConnector,
                  participatory_space_name: str,
                  base_path="."):
@@ -27,8 +26,7 @@ class ProposalProcessCommentReader(AbstractDecidimReader):
         :param decidim_connector: An instance of a DecidimConnector class.
         :param base_path: The base path to the schema directory.
         """
-        super().__init__(decidim_connector, base_path + "/" + query_path)
-        self.__participatory_space_name: str = participatory_space_name
+        super().__init__(decidim_connector, participatory_space_name, base_path + "/" + QUERY_PATH)
 
     def execute(self, participatory_space_id: str, proposal_id: str, comment_id: str) -> Comment or None:
         """
@@ -44,10 +42,18 @@ class ProposalProcessCommentReader(AbstractDecidimReader):
                 'ID_PARTICIPATORY_PROCESS': ElementalTypeElement(participatory_space_id),
                 'ID_PROPOSAL': ElementalTypeElement(proposal_id),
                 'ID_COMMENT': ElementalTypeElement(comment_id),
+                'PARTICIPATORY_SPACE_NAME': ElementalTypeElement(super().participatory_space_name)
             })
 
-        try:
-            comment_dict = response[self.__participatory_space_name]['components'][0]['proposal']['comments'][0]
+        proposals = response[super().participatory_space_name]['components']
+        proposals = [comment for comment in proposals if comment['proposal'] is not None]
+        if (len(proposals) > 1):
+            print("dsfsfdsdf")
+        for proposal in proposals:
+            comment_dict = proposal['proposal']['comments'][0]
+            if (len(proposal['proposal']['comments']) > 1):
+                print("WARnING: THERE WAS MORE THAN ONE COMMENT")
+
             accepts_new_comments: bool = comment_dict['acceptsNewComments']
             alignment: int = comment_dict['alignment']
             already_reported: bool = comment_dict['alreadyReported']
@@ -68,8 +74,8 @@ class ProposalProcessCommentReader(AbstractDecidimReader):
             comments_id_list = comment_dict['comments']
 
             comments_id = []
-            for comment_id in comments_id_list:
-                comments_id.append(comment_id['id'])
+            for comment_id_from_list in comments_id_list:
+                comments_id.append(comment_id_from_list['id'])
 
             new_comment: Comment = Comment(accepts_new_comments,
                                            alignment,
@@ -91,5 +97,4 @@ class ProposalProcessCommentReader(AbstractDecidimReader):
                                            user_allowed_to_comment,
                                            comments_id)
             return new_comment
-        except IndexError:
-            return None
+        return None
