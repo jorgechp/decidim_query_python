@@ -1,7 +1,0 @@
-#This query retrieves ids of assemblies.
-
-{
-    assemblies(filter: {%FILTER%}, order: {%ORDER%}){
-        id
-    }
-}

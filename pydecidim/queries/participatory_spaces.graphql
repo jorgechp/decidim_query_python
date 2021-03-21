@@ -1,0 +1,13 @@
+#This query retrieves ids of assemblies.
+
+{
+%PARTICIPATORY_SPACE_NAME%(filter: {%FILTER%}, order: {%ORDER%}){
+id
+title {
+translations {
+locale,
+text
+}
+}
+}
+}

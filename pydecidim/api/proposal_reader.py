@@ -1,10 +1,9 @@
 """
 This Reader retrives a full Proposal information.
 """
-from pydecidim.api.ParticipatorySpaceReader import ParticipatorySpaceReader
 from pydecidim.api.decidim_connector import DecidimConnector
+from pydecidim.api.participatory_space_reader import ParticipatorySpaceReader
 from pydecidim.model.elemental_type_element import ElementalTypeElement
-
 # Path to the query schema
 from pydecidim.model.proposal import Proposal
 from pydecidim.model.translated_field import TranslatedField
