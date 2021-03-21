@@ -2,6 +2,7 @@
 This Reader retrives a full Proposal information.
 """
 from pydecidim.api.decidim_connector import DecidimConnector
+from pydecidim.api.participatory_space_name_enum import ParticipatorySpaceNameEnum
 from pydecidim.api.participatory_space_reader import ParticipatorySpaceReader
 from pydecidim.model.author import Author
 from pydecidim.model.comment import Comment
@@ -19,7 +20,7 @@ class ProposalProcessCommentReader(ParticipatorySpaceReader):
 
     def __init__(self,
                  decidim_connector: DecidimConnector,
-                 participatory_space_name: str,
+                 participatory_space_name: ParticipatorySpaceNameEnum,
                  base_path="."):
         """
 
@@ -42,10 +43,10 @@ class ProposalProcessCommentReader(ParticipatorySpaceReader):
                 'ID_PARTICIPATORY_PROCESS': ElementalTypeElement(participatory_space_id),
                 'ID_PROPOSAL': ElementalTypeElement(proposal_id),
                 'ID_COMMENT': ElementalTypeElement(comment_id),
-                'PARTICIPATORY_SPACE_NAME': ElementalTypeElement(super().participatory_space_name)
+                'PARTICIPATORY_SPACE_NAME': ElementalTypeElement(super().participatory_space_name.value)
             })
 
-        proposals = response[super().participatory_space_name]['components']
+        proposals = response[super().participatory_space_name.value]['components']
         proposals = [comment for comment in proposals if comment['proposal'] is not None]
 
         for proposal in proposals:

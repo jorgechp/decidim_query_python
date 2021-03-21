@@ -2,6 +2,7 @@
 This Reader retrives a full Proposal information.
 """
 from pydecidim.api.decidim_connector import DecidimConnector
+from pydecidim.api.participatory_space_name_enum import ParticipatorySpaceNameEnum
 from pydecidim.api.participatory_space_reader import ParticipatorySpaceReader
 from pydecidim.model.elemental_type_element import ElementalTypeElement
 # Path to the query schema
@@ -16,7 +17,9 @@ class ProposalReader(ParticipatorySpaceReader):
     This reader retrieves a Proposal from Decidim.
     """
 
-    def __init__(self, decidim_connector: DecidimConnector, participatory_space_name: str, base_path="."):
+    def __init__(self, decidim_connector: DecidimConnector,
+                 participatory_space_name: ParticipatorySpaceNameEnum,
+                 base_path="."):
         """
 
         :param decidim_connector: An instance of a DecidimConnector class.
@@ -24,7 +27,7 @@ class ProposalReader(ParticipatorySpaceReader):
         """
         super().__init__(decidim_connector, participatory_space_name, base_path + "/" + QUERY_PATH)
 
-    def execute(self, participatory_process_id: str,  proposal_id: str) -> Proposal or None:
+    def execute(self, participatory_process_id: str, proposal_id: str) -> Proposal or None:
         """
         Send the query to the API and extract a list of proposals ids from a participatory space.
         :param participatory_process_id: The participatory process id.
@@ -36,10 +39,10 @@ class ProposalReader(ParticipatorySpaceReader):
             {
                 'ID_PARTICIPATORY_PROCESS': ElementalTypeElement(participatory_process_id),
                 'ID_PROPOSAL': ElementalTypeElement(proposal_id),
-                'PARTICIPATORY_SPACE_NAME': ElementalTypeElement(super().participatory_space_name)
+                'PARTICIPATORY_SPACE_NAME': ElementalTypeElement(super().participatory_space_name.value)
             })
 
-        proposals = response[super().participatory_space_name]['components']
+        proposals = response[super().participatory_space_name.value]['components']
         proposals = [comment for comment in proposals if comment['proposal'] is not None]
         for proposal in proposals:
             proposal_dict = proposal['proposal']

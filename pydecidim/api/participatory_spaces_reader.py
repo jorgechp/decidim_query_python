@@ -4,6 +4,7 @@ This Reader retrives a full Proposal information.
 from typing import List
 
 from pydecidim.api.decidim_connector import DecidimConnector
+from pydecidim.api.participatory_space_name_enum import ParticipatorySpaceNameEnum
 from pydecidim.api.participatory_space_reader import ParticipatorySpaceReader
 # Path to the query schema
 from pydecidim.model.elemental_type_element import ElementalTypeElement
@@ -18,7 +19,9 @@ class ParticipatorySpacesReader(ParticipatorySpaceReader):
     This reader retrieves a Proposal from Decidim.
     """
 
-    def __init__(self, decidim_connector: DecidimConnector, participatory_space_name: str, base_path="."):
+    def __init__(self, decidim_connector: DecidimConnector,
+                 participatory_space_name: ParticipatorySpaceNameEnum,
+                 base_path="."):
         """
 
         :param decidim_connector: An instance of a DecidimConnector class.
@@ -37,11 +40,12 @@ class ParticipatorySpacesReader(ParticipatorySpaceReader):
         response: dict = super().process_query_from_file({'filter': component_filter,
                                                           'order': component_sort,
                                                           'PARTICIPATORY_SPACE_NAME':
-                                                              ElementalTypeElement(super().participatory_space_name)
+                                                              ElementalTypeElement(
+                                                                  super().participatory_space_name.value)
                                                           })
 
         participatory_processes: List[str] = []
-        for participatory_process_dict in response[super().participatory_space_name]:
+        for participatory_process_dict in response[super().participatory_space_name.value]:
             participatory_process_id: str = participatory_process_dict['id']
             participatory_processes.append(participatory_process_id)
         return participatory_processes
