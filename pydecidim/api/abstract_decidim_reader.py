@@ -15,6 +15,14 @@ class AbstractDecidimReader(ABC):
     def decidim_connector(self, decidim_connector: DecidimConnector):
         self.__decidim_connector = decidim_connector
 
+    @property
+    def query_path(self) -> str:
+        return self.__query_path
+
+    @query_path.setter
+    def query_path(self, new_query_path: str) -> None:
+        self.__query_path = new_query_path
+
     def __init__(self, decidim_connector: DecidimConnector, query_schema: str):
         self.__query_path = query_schema
         self.decidim_connector = decidim_connector

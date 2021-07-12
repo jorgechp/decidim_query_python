@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pydecidim',
-    version='0.1.1',
+    version='0.1.2',
     packages=['pydecidim', 'pydecidim/api', 'pydecidim/model'],
     license='LICENSE.txt',
     long_description=open('README.md').read(),

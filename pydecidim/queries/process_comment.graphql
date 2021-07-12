@@ -12,36 +12,36 @@ alreadyReported,
 author{
 avatarUrl,
 badge,
-                           deleted,
-                           id,
-                           name,
-                           nickname,
-                           organizationName,
-                           profilePath
-                       },
-                       body,
-                       comments{
-                           id
-                       },
-                       commentsHaveAlignment,
-                       commentsHaveVotes,
-                       createdAt,
-                       downVoted,
-                       downVotes,
-                       formattedBody,
-                       formattedCreatedAt,
-                       hasComments,
-                       id,
-                       sgid,
-                       totalCommentsCount,
-                       type,
-                       upVoted,
-                       upVotes,
-                       downVotes,
-                       userAllowedToComment
-                   }
-          		}
-            }
-          }
-      }
+deleted,
+id,
+name,
+nickname,
+organizationName,
+profilePath
+},
+body,
+comments{
+id
+},
+commentsHaveAlignment,
+commentsHaveVotes,
+createdAt,
+downVoted,
+downVotes,
+formattedBody,
+formattedCreatedAt,
+hasComments,
+id,
+sgid,
+totalCommentsCount,
+type,
+upVoted,
+upVotes,
+downVotes,
+userAllowedToComment
+}
+}
+}
+}
+}
 }

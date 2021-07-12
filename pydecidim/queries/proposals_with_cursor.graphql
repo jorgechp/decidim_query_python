@@ -5,7 +5,7 @@
 id
 components(filter: { type: "Proposals" }){
 ... on Proposals{
-proposals{
+proposals(after: "%AFTER%"){
 edges{
 node{
 id
